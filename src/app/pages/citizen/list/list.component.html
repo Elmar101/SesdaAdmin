@@ -1,0 +1,134 @@
+<mat-sidenav-container fullscreen class="p">
+  <mat-sidenav #sidenav opened mode="side" position="start">
+    <h2>ADMİNİSTRATORUN İŞ YERİ</h2>
+    <hr/>
+      <button mat-menu-item> <mat-icon> brightness_3 </mat-icon> Vətəndaşlar </button>
+  </mat-sidenav>
+  <mat-sidenav-container class="m">
+    <mat-toolbar color="primary" class="br">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon> menu </mat-icon>
+      </button>
+      Vətəndaşlar
+      <button position="end" mat-button [matMenuTriggerFor]="menu">
+        <mat-icon> more_vert </mat-icon>
+
+         </button>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item> <mat-icon> brightness_3 </mat-icon> Tünd rejim </button>
+        <button mat-menu-item> <mat-icon> exit_to_app </mat-icon> Çıxış </button>
+      </mat-menu>
+
+    </mat-toolbar>
+    <div class="main-content">
+      <div class="mat-elevation-z8">
+        <mat-card>
+          <mat-card-content>
+            <form class="example-form" >
+              <table class="example-full-width" cellspacing="0">
+                <tr>
+                  <td><mat-form-field class="example-full-width">
+                    <mat-label>Fin</mat-label>
+                    <input matInput placeholder="Fin">
+                    </mat-form-field>
+                  </td>
+
+                  <td><mat-form-field  class="example-full-width">
+                    <mat-label>Ad</mat-label>
+                    <input   (keyup)="filter($event)" matInput placeholder="Ad">
+                    </mat-form-field>
+                  </td>
+
+                  <td><mat-form-field class="example-full-width">
+                    <mat-label>Soyad</mat-label>
+                    <input   matInput placeholder="Soyad">
+                    </mat-form-field>
+                  </td>
+
+                  <td><mat-form-field class="example-full-width">
+                    <mat-label>AtaAdi</mat-label>
+                    <input   matInput placeholder="AtaAdi">
+                    </mat-form-field>
+                  </td>
+                  <td >
+                    <mat-form-field class="w15">
+                      <mat-label>Başlanğıc tarix</mat-label>
+                      <input matInput [matDatepicker]="picker1">
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class="w15">
+                      <mat-label> Son tarix</mat-label>
+                      <input matInput [matDatepicker]="picker2">
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field >
+                    <mat-label>Cinsi</mat-label>
+                    <mat-select disableRipple>
+                      <mat-option value="1">--Seçin--</mat-option>
+                      <mat-option value="2">Kişi</mat-option>
+                      <mat-option value="3">Qadin</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+               </tr>
+              </table>
+            </form>
+
+          </mat-card-content>
+          <mat-table class="full-width-table" matSort aria-label="Elements" [dataSource]="dataSource">
+
+            <ng-container matColumnDef="pin" >
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Fin</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{row.pin}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="firstName" >
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Ad</mat-header-cell >
+              <mat-cell *matCellDef="let row" >{{row.firstName}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="lastName">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Soyad</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{row.lastName}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="fatherName">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>AtaAdi</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{row.fatherName}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="birthDate" class="w15">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Doğum tarixi</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{row.birthDate}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="gender">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Cinsi</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{row.gender}}</mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"
+            (click)="loadDetails(row)">
+          </mat-row>
+          </mat-table>
+
+          <!---  <mat-paginator
+                [pageSizeOptions]="[8, 8,5]"
+                showFirstLastButtons>
+          </mat-paginator> -->
+
+        </mat-card>
+
+
+        </div>
+    </div>
+
+  </mat-sidenav-container>
+</mat-sidenav-container>
+
+
+

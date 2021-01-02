@@ -1,0 +1,26 @@
+<mat-card color="warn" *ngIf="errorMessage != null">
+  {{errorMessage}}
+</mat-card>
+
+<div fxLayoutAlign="center center" fxFlexFill class="main-div">
+  <mat-card fxFlex="25">
+    <mat-toolbar color="primary"> ADMİN PANEL </mat-toolbar>
+    <form fxLayoutAlign="stretch" fxLayout="column" class="login-form" #form = "ngForm" (ngSubmit)="login(form)">
+      <mat-form-field>
+        <mat-label>istifadəçi adı</mat-label>
+        <input matInput placeholder="istifadəçi adı" name="userName"  [(ngModel)] = "userName" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Şifrə</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" matInput placeholder="Şifrə" name="password"  [(ngModel)] = "password" required>
+        <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+      </mat-form-field>
+      <button mat-raised-button type="submit" [disabled]="form.invalid"> Daxil ol </button>
+    </form>
+  </mat-card>
+</div>
+
+
