@@ -16,8 +16,6 @@ import { PagesComponent } from './pages.component';
 @NgModule({
   declarations: [PagesComponent],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
     AngMaterialModule,
     CommonModule,
     PagesRoutingModule,

@@ -20,8 +20,6 @@ const routes: Routes = [
   declarations: [CitizenComponent],
   imports: [
     CommonModule,
-    BrowserModule,
-    BrowserAnimationsModule,
     AngMaterialModule,
     FormsModule,
     ReactiveFormsModule,
