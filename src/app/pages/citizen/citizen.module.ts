@@ -12,7 +12,7 @@ const routes: Routes = [
       {path:'',redirectTo:'list',pathMatch:'full'},
       {path:'list',loadChildren:()=>import('./list/list.module').then(m=>m.ListModule)},
       {path:'details',loadChildren:()=>import('./details/details.module').then(m=>m.DetailsModule)},
-      {path: 'details/:id',loadChildren:()=>import('./details/details.component').then(m=>m.DetailsComponent)}
+      {path: 'details/:id',loadChildren:()=>import('./details/details.module').then(m=>m.DetailsModule)}
     ]
   }
 ];

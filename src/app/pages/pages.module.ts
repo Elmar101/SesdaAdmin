@@ -8,8 +8,6 @@ import { AuthGuard } from '../guard/auth.guard';
 import { JwtInterceptor } from '../libs/interceptors/jwt.interceptor';
 import { AuthService } from '../services/auth.service';
 import { LoginService } from '../services/login.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PagesComponent } from './pages.component';
 
 

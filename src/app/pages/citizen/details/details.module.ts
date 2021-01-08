@@ -4,7 +4,6 @@ import { Routes,RouterModule} from '@angular/router';
 import { DetailsComponent } from './details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngMaterialModule } from 'src/app/ang-material/ang-material.module';
-//import { AngMaterialModule } from '../../../ang-material/ang-material.module';
 
 const routes:Routes =[
   {path:'',component: DetailsComponent,pathMatch: 'full'}
