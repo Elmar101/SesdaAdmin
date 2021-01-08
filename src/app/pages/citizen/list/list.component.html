@@ -67,10 +67,10 @@
                 <td>
                   <mat-form-field >
                     <mat-label>Cinsi</mat-label>
-                    <mat-select disableRipple>
-                      <mat-option value="1">--Seçin--</mat-option>
-                      <mat-option value="2">Kişi</mat-option>
-                      <mat-option value="3">Qadin</mat-option>
+                    <mat-select disableRipple #name (valueChange)="selectValueGender($event)">
+                      <mat-option value="gender">--Seçin--</mat-option>
+                      <mat-option value="Kişi">Kişi</mat-option>
+                      <mat-option value="Qadin">Qadin</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </td>
@@ -103,16 +103,17 @@
 
             <ng-container matColumnDef="birthDate" class="w15">
               <mat-header-cell *matHeaderCellDef mat-sort-header>Doğum tarixi</mat-header-cell>
-              <mat-cell *matCellDef="let row">{{row.birthDate}}</mat-cell>
+              <mat-cell *matCellDef="let row">{{row.birthDate | date: 'dd.MM.yyyy'}}</mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="gender">
+            <ng-container matColumnDef="gender" >
               <mat-header-cell *matHeaderCellDef mat-sort-header>Cinsi</mat-header-cell>
-              <mat-cell *matCellDef="let row">{{row.gender}}</mat-cell>
+              <mat-cell *matCellDef="let row">{{ row.gender==0 ? 'Qadin': 'Kişi' }}</mat-cell>
             </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"
-            (click)="loadDetails(row)">
+            (click)="loadDetails(row)"
+            >
           </mat-row>
           </mat-table>
 

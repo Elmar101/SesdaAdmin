@@ -14,6 +14,13 @@ import { CitizenService } from 'src/app/services/citizen.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit ,AfterViewInit{
+  size: number = 10;
+  page: number = 1;
+  counter: boolean = true;
+  sortColumn:string = "s_pin";
+  sortDirection:string = "asc";
+
+  totalCount!: number;
   userParams: any = {} //fiter
   search ='';
   ELEMENT_DATA!: Citizen[] ;
@@ -28,25 +35,44 @@ export class ListComponent implements OnInit ,AfterViewInit{
     private el:ElementRef
     ) {
   }
+
+  selectValueGender(gender: string){
+    console.log(gender);
+  }
   filter(input: any){
     console.log(input.key)
   }
   ngOnInit(): void {
+
     this.getCitizens();
   }
   ngAfterViewInit(){
 
   }
-  public getCitizens(){
-    let citizens = this.citizenService.getAllCitizen();
-    citizens.subscribe(data => {
-     this.dataSource.data = data as Citizen[];
-     //this.dataSource.paginator = this.paginator;
-    })
-  }
+   getCitizens(){
+    this.route.paramMap.subscribe(
+      params =>{
+        if(params.get("size")){
+          this.size = Number(params.get("size"))
+        }
+        this.dataSource.data = [];
+        this.totalCount = 0;
+        },
+      error =>{}
+    )
+    this.citizenService.getAllCitizen(this.size, this.page, this.counter, this.sortColumn, this.sortDirection)
+    .subscribe(
+      data => {
+        //console.log(data);
+        this.dataSource.data = data as Citizen[];
+      },
+      error=>{
+        console.log(error.error.message)
+      }
+    )
+   }
   loadDetails(row: any){
-    //console.log(row.id)
+    //console.log(row)
    this.router.navigate(['/pages/citizen/details',row.id])
   }
 }
-

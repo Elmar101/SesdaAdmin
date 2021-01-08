@@ -10,7 +10,7 @@ export class DetailsService {
   arr!: [any];
   url= " http://172.16.208.15:8888/api/admin/citizen/";// http://172.16.208.15:8888/api/admin/citizen/{id}
   constructor( private http:HttpClient ) { }
-  id : any;
+  id !: string;
   getDetailsService() {
     return this.http.get<any>(this.url + this.id);
   }
