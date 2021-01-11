@@ -1,9 +1,9 @@
 //import { CollectionViewer } from '@angular/cdk/collections';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { fromEvent, of } from 'rxjs';
+import { fromEvent, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Citizen } from 'src/app/models/entity/citizen';
 import { CitizenService } from 'src/app/services/citizen.service';
@@ -13,13 +13,13 @@ import { CitizenService } from 'src/app/services/citizen.service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit ,AfterViewInit{
+export class ListComponent implements OnInit ,AfterViewInit/* ,OnDestroy */{
   size: number = 10;
   page: number = 1;
   counter: boolean = true;
   sortColumn:string = "s_pin";
   sortDirection:string = "asc";
-
+  unsub !: Subscription;
   totalCount!: number;
   userParams: any = {} //fiter
   search ='';
@@ -34,6 +34,9 @@ export class ListComponent implements OnInit ,AfterViewInit{
   constructor(private citizenService:CitizenService, private router: Router,private route: ActivatedRoute,
     private el:ElementRef
     ) {
+  }
+  ngOnDestroy(): void {
+    this.unsub.unsubscribe();
   }
 
   selectValueGender(gender: string){
@@ -60,7 +63,7 @@ export class ListComponent implements OnInit ,AfterViewInit{
         },
       error =>{}
     )
-    this.citizenService.getAllCitizen(this.size, this.page, this.counter, this.sortColumn, this.sortDirection)
+     this.unsub = this.citizenService.getAllCitizen(this.size, this.page, this.counter, this.sortColumn, this.sortDirection)
     .subscribe(
       data => {
         //console.log(data);

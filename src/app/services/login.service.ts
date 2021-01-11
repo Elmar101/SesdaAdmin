@@ -12,21 +12,10 @@ export class LoginService {
   }
 
   getAuthenticate(){
-
     return this.authService.authenticationGet();
   }
 
-  /*  getToken(){
-    const token = sessionStorage.getItem("token");
-    if(token){
-      return token;
-    } else {
-      this.authenticate().subscribe( data =>{
-        sessionStorage.setItem("token","dmadmin");
-        this.getToken();
-      })
-    }
-  }  */  // istifadeci login olub olmayib
+ // istifadeci login olub olmayib
   get _authenticated(): Observable<boolean> {
     return of(this.authService.token !=null);
   }

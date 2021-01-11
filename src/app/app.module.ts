@@ -4,8 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngMaterialModule } from './ang-material/ang-material.module';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { LoginService } from './services/login.service';
@@ -20,9 +18,7 @@ import { JwtInterceptor } from './libs/interceptors/jwt.interceptor';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule,
     HttpClientModule,
-    AngMaterialModule
   ],
   providers: [
     AuthService,

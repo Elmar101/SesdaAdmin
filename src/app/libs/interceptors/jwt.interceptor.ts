@@ -20,7 +20,9 @@ export class JwtInterceptor implements HttpInterceptor {
     }else{
       request = request.clone({
         setHeaders:{Authorization :`${sessionStorage.getItem("token")}`}
+        //headers: request.headers.set("Authorization", `${token}`)
       })
+      //console.log(request)
       return next.handle(request);
     }
   }

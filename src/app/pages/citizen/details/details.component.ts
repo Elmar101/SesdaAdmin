@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Citizen } from 'src/app/models/entity/citizen';
@@ -13,9 +13,10 @@ import { tap } from 'rxjs/operators';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit,OnDestroy {
   element !: Citizen[];
   details : any =[];
+  unsubscribe !: Subscription;
   get pin():any{
     return  this.details["pin"] ? this.details["pin"] : null;
   }
@@ -47,6 +48,9 @@ export class DetailsComponent implements OnInit {
     return this.details["phone"] ? this.details["phone"] : this.details["phone"]== null;
   }
   constructor( private detailsService: DetailsService, private route: ActivatedRoute) { }
+  ngOnDestroy(): void {
+    this.unsubscribe.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.route.params
@@ -60,7 +64,7 @@ export class DetailsComponent implements OnInit {
     })
   }
   getDetails(){
-    this.detailsService.getDetailsService()
+    this. unsubscribe = this.detailsService.getDetailsService()
     .subscribe( data => {
       //console.log(data)
       Object.keys(data).map(key=>({
