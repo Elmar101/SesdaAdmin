@@ -30,4 +30,18 @@ export class AuthService {
   authenticationGet(){
     return this.http.get(this.baseUrl + 'login');
   }
+
+/* getToken():any{
+  const token = sessionStorage.getItem("token");
+  if(token){
+    return token;
+  } else {
+    this.authentication().subscribe( data =>{
+      sessionStorage.setItem("token","dmadmin");
+      this.getToken();
+    })
+  }
+} */
+
+
 }
